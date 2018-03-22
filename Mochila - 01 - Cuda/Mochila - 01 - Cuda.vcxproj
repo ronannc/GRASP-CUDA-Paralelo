@@ -87,6 +87,9 @@
       <Command>echo copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
 copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
+    <CudaCompile>
+      <CodeGeneration>compute_35,sm_35</CodeGeneration>
+    </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -155,11 +158,13 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EntradaDeDados.h" />
+    <ClInclude Include="GRASPLib.cuh" />
     <ClInclude Include="MetodosCompletaSolucao.cuh" />
     <ClInclude Include="MetodosRetiraItem.cuh" />
     <ClInclude Include="objeto.h" />
     <ClInclude Include="ParallelGRASP.cuh" />
     <ClInclude Include="Selection_Sort.h" />
+    <ClInclude Include="Simulated_Annealing.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

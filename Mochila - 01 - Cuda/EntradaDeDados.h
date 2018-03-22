@@ -15,7 +15,8 @@ void entrada_dados_vetor(item *itens, int number_of_itens) {
 	fscanf(arq, "%d %d\n", &number_of_itens, &aux);
 	for (int i = 0; i < number_of_itens; i++) {
 		fscanf(arq, "%d %d\n", &aux, &aux1);
-		itens[i].peso = aux;
-		itens[i].valor = aux1;
+		itens[i].peso = aux1;
+		itens[i].valor = aux;
+		itens[i].ganho = (float)aux / (float)aux1;
 	}
 }

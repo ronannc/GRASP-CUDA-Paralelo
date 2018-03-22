@@ -1,6 +1,3 @@
-#pragma once
-
-//#include "objeto.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -164,4 +161,64 @@ __device__ void retira_menor_valor(int number_of_itens, bool *solutionParcial, i
 	//revisao(number_of_itens, solutionParcial, size_of_itens);
 
 	free(rcl);
+}\
+
+__device__ void roleta(bool *solutionParcial, item *size_of_itens, int number_of_itens, int &peso, int &valor, int seed) {
+	struct roleta {
+		int id;
+		float ganho;
+	};
+
+	curandState_t state;
+	curand_init(seed, /* the seed controls the sequence of random values that are produced */
+		0, /* the sequence number is only important with multiple cores */
+		0, /* the offset is how much extra we advance in the sequence for each call, can be 0 */
+		&state);
+
+	float soma_ganhos = 0;
+	int tamanho = 0;
+
+	for (int i = 0; i < number_of_itens; i++) {
+		if (solutionParcial[i]) {
+			++tamanho;
+			soma_ganhos += size_of_itens[i].ganho;
+		}
+
+	}
+
+	roleta *iten_roleta;
+	iten_roleta = (roleta *)malloc(tamanho * sizeof(roleta));
+
+	roleta aux;
+	aux.ganho = 0;
+	aux.id = 0;
+	float anterior = 0;
+
+	for (int j = 0; j < tamanho; j++) {
+		for (int i = 0; i < number_of_itens; i++) {
+			if (solutionParcial[i]) {
+				if (size_of_itens[i].ganho > aux.ganho) {
+					aux.ganho = size_of_itens[i].ganho;
+					aux.id = i;
+				}
+			}
+		}
+		iten_roleta[j].ganho = (soma_ganhos - aux.ganho) + anterior;
+		iten_roleta[j].id = aux.id;
+		anterior += soma_ganhos - aux.ganho;
+	}
+
+	float id_rand = curand(&state) % (int)anterior;
+	int aux_id = 0;
+
+	for (int i = 0; i < tamanho; i++) {
+		if (iten_roleta[i].ganho >= id_rand) {
+			aux_id = iten_roleta[i].id;
+			break;
+		}
+	}
+
+	solutionParcial[aux_id] = 0;
+	valor -= size_of_itens[aux_id].valor;
+	peso -= size_of_itens[aux_id].peso;
 }

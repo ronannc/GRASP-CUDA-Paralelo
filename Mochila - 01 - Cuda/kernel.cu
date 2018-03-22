@@ -31,10 +31,10 @@ int main() {
 	int decaimento_temperatura = 1;
 	
 	//tamanha usado para tornar a geração da solução inicial e busca aleatoria, se 1 fica modo guloso
-	int tamanho_RCL = 100;
+	int tamanho_RCL = 10;
 
 	//numero de iterações que o GRASP fara
-	int max_iter = 50;
+	int max_iter = 10;
 	
 	//quantidade de threads e blocos
 	int threads = 10;
@@ -93,7 +93,7 @@ int main() {
 		printf("Sem memoria disponivel! (soluctions)\n");
 		exit(1);
 	}
-
+	//iniciando a solução com todos os itens fora da mochila == 0
 	for (int i = 0; i < quantidade_itens * threads * blocks; i++) {
 		soluctions[i] = 0;
 	}
