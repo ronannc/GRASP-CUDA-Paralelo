@@ -159,10 +159,12 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <ClInclude Include="EntradaDeDados.h" />
     <ClInclude Include="GRASPLib.cuh" />
+    <ClInclude Include="HelperCUDA.h" />
     <ClInclude Include="MetodosCompletaSolucao.cuh" />
     <ClInclude Include="MetodosRetiraItem.cuh" />
     <ClInclude Include="objeto.h" />
     <ClInclude Include="ParallelGRASP.cuh" />
+    <ClInclude Include="SaidaArquivo.h" />
     <ClInclude Include="Selection_Sort.h" />
     <ClInclude Include="Simulated_Annealing.cuh" />
   </ItemGroup>

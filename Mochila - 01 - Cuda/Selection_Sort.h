@@ -1,5 +1,3 @@
-
-
 void selection_sort(item *num, int tam){
 
 	int i, j, min, peso, valor = 0;

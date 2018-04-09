@@ -2,14 +2,14 @@
 void entrada_dados(int &number_of_itens, int &bin_capacity) {
 
 	FILE *arq;
-	arq = fopen("knapPI_1_1000_1000_1.txt", "rt");
+	arq = fopen("knapPI_1_2000_1000_1.txt", "rt");
 	fscanf(arq, "%d %d\n", &number_of_itens, &bin_capacity);
 }
 
 void entrada_dados_vetor(item *itens, int number_of_itens) {
 
 	FILE *arq;
-	arq = fopen("knapPI_1_1000_1000_1.txt", "rt");
+	arq = fopen("knapPI_1_2000_1000_1.txt", "rt");
 	int aux = 0;
 	int aux1 = 0;
 	fscanf(arq, "%d %d\n", &number_of_itens, &aux);

@@ -17,6 +17,12 @@ __device__ void LocalSearch(int number_of_itens, bool *solutionParcial, int bin_
 //Atualiza a solução final com a melhor solução maximizando o ganho (valor)
 __device__ void UpdateSolution(bool *solutionParcial, bool *solutionFinal, int number_of_itens);
 
+__device__ void printdebug(int *i) {
+	*i = *i + 1;
+	if (*i % 30 == 1)
+		printf("%d ", *i-1);
+}
+
 //GRASP 
 __global__ void parallelGRASP(int max_iter, int number_of_itens, int bin_capacity, item *size_of_itens, bool *soluctions, int temperatura, int decaimento_temperatura, int tamanho_RCL, int seed){
 
@@ -40,9 +46,13 @@ __global__ void parallelGRASP(int max_iter, int number_of_itens, int bin_capacit
 
 	int valor_parcial = 0, peso_parcial = 0, max_valor = 0;
 
+	int debug = 0;
+
 	for (i = 0; i < max_iter; i++) {
 
 		/*inicio grasp*/
+
+		//printdebug(&debug);
 
 		//gera solução inicial
 		GreedyRandomizedConstruction(number_of_itens, solutionParcial, size_of_itens, bin_capacity, seed + i + idx, tamanho_RCL, peso_parcial, valor_parcial);
@@ -119,7 +129,7 @@ __device__ void UpdateSolution(bool *solutionParcial, bool *solutionFinal, int n
 	/*id da thread corrente*/
 	int idx = blockDim.x * blockIdx.x + threadIdx.x;
 
-	for (int j = number_of_itens * idx; j < number_of_itens * (idx + 1); j++) {
+	for (long int j = number_of_itens * idx; j < number_of_itens * (idx + 1); j++) {
 		if (solutionParcial[j - (number_of_itens * idx)]){
 			solutionFinal[j] = 1;
 		}
