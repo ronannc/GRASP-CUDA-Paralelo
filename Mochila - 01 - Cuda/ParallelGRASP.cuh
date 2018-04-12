@@ -46,8 +46,6 @@ __global__ void parallelGRASP(int max_iter, int number_of_itens, int bin_capacit
 
 	int valor_parcial = 0, peso_parcial = 0, max_valor = 0;
 
-	int debug = 0;
-
 	for (i = 0; i < max_iter; i++) {
 
 		/*inicio grasp*/

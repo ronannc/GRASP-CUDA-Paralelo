@@ -24,14 +24,14 @@ cudaError_t parallel_GRASP(int max_iter, int quantidade_itens, int capacidade_mo
 	item *dev_itens;
 	cudaStatus = cudaMalloc((void**)&dev_itens, quantidade_itens * sizeof(item));
 	if (cudaStatus != cudaSuccess) {
-		fprintf(stderr, "cudaMalloc dev_size_of_itens failed!");
+		fprintf(stderr, "cudaMalloc dev_itens failed!");
 		goto Error;
 	}
 
 	bool* dev_soluctions;
 	cudaStatus = cudaMalloc((void**)&dev_soluctions, quantidade_itens * threads * blocks * sizeof(bool));
 	if (cudaStatus != cudaSuccess) {
-		fprintf(stderr, "cudaMalloc dev_vectorValor failed!");
+		fprintf(stderr, "cudaMalloc dev_soluctions failed!");
 		goto Error;
 	}
 
@@ -57,7 +57,7 @@ cudaError_t parallel_GRASP(int max_iter, int quantidade_itens, int capacidade_mo
 	cudaStatus = cudaDeviceSynchronize();
 
 	if (cudaStatus != cudaSuccess) {
-		fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
+		fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching parallelGRASP!\n", cudaStatus);
 		goto Error;
 	}
 

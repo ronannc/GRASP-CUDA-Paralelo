@@ -39,10 +39,10 @@ int main() {
 	int tamanho_RCL = 10;
 
 	//numero de iterações que o GRASP fara
-	int max_iter = 10;
+	int max_iter = 1;
 	
 	//quantidade de threads e blocos
-	int threads = 10;
+	int threads = 100;
 	int blocks = 10;
 
 	// numero de elementos
@@ -131,7 +131,7 @@ int main() {
 
 
 
-		for (int i = 0; i < quantidade_itens * threads * blocks; i++) {
+		for (long int i = 0; i < quantidade_itens * threads * blocks; i++) {
 
 			if (cont < quantidade_itens) {
 				if (soluctions[i] == 1) {
